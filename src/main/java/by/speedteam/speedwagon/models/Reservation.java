@@ -2,9 +2,6 @@ package by.speedteam.speedwagon.models;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 @Entity
 @Table(name = "reservation")
 public class Reservation {
@@ -31,28 +28,20 @@ public class Reservation {
     @Column(nullable = false)
     private int passengersAmount;
 
-    @Column(nullable = false)
-    private LocalDate date;
-
-    @Column(nullable = false)
-    private LocalTime time;
-
     private String note;
 
     public Reservation() {
     }
 
-//    public Reservation(User user, Trip trip, PaymentMethod paymentMethod, BusStop stop,
-//                       int passengersAmount, LocalDate date, LocalTime time, String note) {
-//        this.user = user;
-//        this.trip = trip;
-//        this.paymentMethod = paymentMethod;
-//        this.stop = stop;
-//        this.passengersAmount = passengersAmount;
-//        this.date = date;
-//        this.time = time;
-//        this.note = note;
-//    }
+    public Reservation(User user, Trip trip, PaymentMethod paymentMethod,
+                       BusStop stop, int passengersAmount, String note) {
+        this.user = user;
+        this.trip = trip;
+        this.paymentMethod = paymentMethod;
+        this.stop = stop;
+        this.passengersAmount = passengersAmount;
+        this.note = note;
+    }
 
     public long getId() {
         return id;
@@ -100,22 +89,6 @@ public class Reservation {
 
     public void setPassengersAmount(int passengersAmount) {
         this.passengersAmount = passengersAmount;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
     }
 
     public String getNote() {

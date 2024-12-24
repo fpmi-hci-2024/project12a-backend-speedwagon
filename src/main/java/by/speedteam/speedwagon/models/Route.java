@@ -17,7 +17,8 @@ public class Route {
     @JoinColumn(nullable = false)
     private BusStop destinationPoint;
 
-    @Column(columnDefinition = "json", nullable = false)
+    //    @Column(columnDefinition = "json", nullable = false)
+    @Column(nullable = false)
     private String listOfStopsId;
 
     public Route() {

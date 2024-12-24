@@ -43,6 +43,16 @@ public class UserService {
         return userRepository.existsByPhone(phone);
     }
 
+    public User createUser(User user) {
+        if (isEmailAlreadyExists(user.getEmail())) {
+            throw new RuntimeException("Email already exists");
+        }
+        if (isPhoneAlreadyExists(user.getPhone())) {
+            throw new RuntimeException("Phone already exists");
+        }
+        return userRepository.save(user);
+    }
+
     public User registerUser(RegisterRequest registerRequest) {
         Role role = roleRepository.findByName(ERole.ROLE_USER)
                 .orElseThrow(() -> new RuntimeException("Role " + ERole.ROLE_USER + " not found"));

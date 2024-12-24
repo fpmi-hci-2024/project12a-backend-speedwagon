@@ -39,17 +39,17 @@ public class Trip {
     public Trip() {
     }
 
-//    public Trip(Bus bus, Route route, int totalSeats, int freeSeats, LocalDate date,
-//                LocalTime startTime, LocalTime endTime, double cost) {
-//        this.bus = bus;
-//        this.route = route;
-//        this.totalSeats = totalSeats;
-//        this.freeSeats = freeSeats;
-//        this.date = date;
-//        this.startTime = startTime;
-//        this.endTime = endTime;
-//        this.cost = cost;
-//    }
+    public Trip(Bus bus, Route route, int totalSeats, int freeSeats, LocalDate date,
+                LocalTime startTime,
+                double cost) {
+        this.bus = bus;
+        this.route = route;
+        this.totalSeats = totalSeats;
+        this.freeSeats = freeSeats;
+        this.date = date;
+        this.startTime = startTime;
+        this.cost = cost;
+    }
 
     public long getId() {
         return id;

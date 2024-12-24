@@ -44,8 +44,6 @@ public class ReservationService {
         reservation.setTrip(updatedReservation.getTrip());
         reservation.setPassengersAmount(updatedReservation.getPassengersAmount());
         reservation.setPaymentMethod(updatedReservation.getPaymentMethod());
-        reservation.setDate(updatedReservation.getDate());
-        reservation.setTime(updatedReservation.getTime());
         reservation.setStop(updatedReservation.getStop());
         reservation.setNote(updatedReservation.getNote());
 
