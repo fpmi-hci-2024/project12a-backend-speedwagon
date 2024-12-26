@@ -50,6 +50,17 @@ public class TripController {
         }
     }
 
+    @GetMapping("/api/v1/trips/search")
+    public ResponseEntity<?> searchTrips(@RequestParam(required = false) Double cost) {
+        try {
+            List<Trip> trips = tripService.getTripsByCost(cost);
+            return ResponseEntity.ok(new SuccessResponse<>("Trips retrieved successfully", trips));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ErrorResponse("Internal server error"));
+        }
+    }
+
     @PostMapping("/api/v1/trips")
     public ResponseEntity<?> createTrip(@RequestBody Trip trip) {
         try {

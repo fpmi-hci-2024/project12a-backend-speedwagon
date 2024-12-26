@@ -142,7 +142,7 @@ public class SpeedWagonApplication {
             busService.createBus(new Bus("АВ 7899-6", "Новиков Михаил Степанович",
                     15, "Volkswagen", "Синий"));
 
-            // 8. Создаем поездки
+            // 8. Создаем рейсы
             tripService.createTrip(new Trip(
                     busService.getBusByNumber("АК 1234-6").get(),
                     routeService.getRouteById(1).get(),

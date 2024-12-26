@@ -1,6 +1,7 @@
 package by.speedteam.speedwagon.models;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -48,6 +49,7 @@ public class Trip {
         this.freeSeats = freeSeats;
         this.date = date;
         this.startTime = startTime;
+        this.endTime = LocalTime.of(startTime.getHour() + 1, startTime.getMinute(), startTime.getSecond());
         this.cost = cost;
     }
 

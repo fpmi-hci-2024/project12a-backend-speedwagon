@@ -53,7 +53,7 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/api/v1/reservations/{userId}")
+    @GetMapping("/api/v1/reservations/user/{userId}")
     public ResponseEntity<?> getReservationsByUserId(@PathVariable("userId") long userId) {
         List<Reservation> reservations = reservationService.getReservationsByUserId(userId);
         if (reservations.isEmpty()) {

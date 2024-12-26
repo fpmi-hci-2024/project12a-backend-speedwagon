@@ -25,6 +25,10 @@ public class TripService {
         return tripRepository.findById(id);
     }
 
+    public List<Trip> getTripsByCost(double cost) {
+        return tripRepository.findByCost(cost);
+    }
+
     public Trip createTrip(Trip trip) {
         return tripRepository.save(trip);
     }

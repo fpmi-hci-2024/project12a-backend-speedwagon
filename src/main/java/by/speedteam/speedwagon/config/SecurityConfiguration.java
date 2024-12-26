@@ -69,17 +69,8 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-//                        .requestMatchers(GET, "/users").hasRole("ADMIN")
-//                        .requestMatchers(GET, "/users/{id}").hasRole("ADMIN")
-//                        .requestMatchers(PUT, "/users/{id}").hasAnyRole("ADMIN", "USER")
-//                        .requestMatchers(PUT, "/users/{id}/assignAdminRole").hasRole("ADMIN")
-//                        .requestMatchers(DELETE, "/users/{id}").hasRole("ADMIN")
-//
-//                        .requestMatchers(GET, "calculations").hasRole("ADMIN")
-//                        .requestMatchers(GET, "/calculations/{id}").hasRole("ADMIN")
-//                        .requestMatchers(GET, "/calculations/user/{userId}").hasAnyRole("ADMIN", "USER")
-//                        .requestMatchers(DELETE, "/calculations/{id}").hasRole("ADMIN")
-//                        .requestMatchers(DELETE, "/calculations/user/{userId}").hasAnyRole("ADMIN", "USER")
+//                                .requestMatchers(GET, "/api/v1/reservations/user/{userId}").hasAnyRole("ADMIN", "USER")
+//                                .requestMatchers(DELETE, "/api/v1/reservations/{id}").hasAnyRole("ADMIN", "USER")
 
                         .anyRequest().permitAll()
                 )
