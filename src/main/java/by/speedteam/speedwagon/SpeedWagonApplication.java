@@ -1,6 +1,7 @@
 package by.speedteam.speedwagon;
 
 import by.speedteam.speedwagon.models.*;
+import by.speedteam.speedwagon.payload.requests.reservations.CreateReservationRequest;
 import by.speedteam.speedwagon.payload.requests.users.RegisterRequest;
 import by.speedteam.speedwagon.services.*;
 import org.springframework.boot.CommandLineRunner;
@@ -205,62 +206,33 @@ public class SpeedWagonApplication {
                     LocalTime.of(20, 0), 19));
 
             // 9. Создаем бронирования
-            reservationService.createReservation(new Reservation(
-                    userService.getUserById(4).get(),
-                    tripService.getTripById(1).get(),
-                    paymentMethodService.getPaymentMethodById(1).get(),
-                    busStopService.getBusStopById(1).get(),
-                    1,
-                    "Предпочитаю сидеть у окна"
-            ));
-            reservationService.createReservation(new Reservation(
-                    userService.getUserById(5).get(),
-                    tripService.getTripById(1).get(),
-                    paymentMethodService.getPaymentMethodById(2).get(),
-                    busStopService.getBusStopById(2).get(),
-                    1,
-                    ""
-            ));
-            reservationService.createReservation(new Reservation(
-                    userService.getUserById(6).get(),
-                    tripService.getTripById(1).get(),
-                    paymentMethodService.getPaymentMethodById(1).get(),
-                    busStopService.getBusStopById(3).get(),
-                    1,
-                    "Хочу у окна"
-            ));
-            reservationService.createReservation(new Reservation(
-                    userService.getUserById(7).get(),
-                    tripService.getTripById(1).get(),
-                    paymentMethodService.getPaymentMethodById(2).get(),
-                    busStopService.getBusStopById(4).get(),
-                    1,
-                    ""
-            ));
-            reservationService.createReservation(new Reservation(
-                    userService.getUserById(8).get(),
-                    tripService.getTripById(4).get(),
-                    paymentMethodService.getPaymentMethodById(1).get(),
-                    busStopService.getBusStopById(10).get(),
-                    1,
-                    "Буду с собакой"
-            ));
-            reservationService.createReservation(new Reservation(
-                    userService.getUserById(9).get(),
-                    tripService.getTripById(4).get(),
-                    paymentMethodService.getPaymentMethodById(2).get(),
-                    busStopService.getBusStopById(10).get(),
-                    1,
-                    ""
-            ));
-            reservationService.createReservation(new Reservation(
-                    userService.getUserById(10).get(),
-                    tripService.getTripById(4).get(),
-                    paymentMethodService.getPaymentMethodById(1).get(),
-                    busStopService.getBusStopById(11).get(),
-                    1,
-                    "Мне нужно одиночное место у выхода"
-            ));
+            reservationService.createReservation(new CreateReservationRequest(
+                    4, 1, EPaymentMethod.PAYMENT_METHOD_CARD,
+                    1, 1, "Предпочитаю сидеть у окна"));
+
+            reservationService.createReservation(new CreateReservationRequest(
+                    5, 1, EPaymentMethod.PAYMENT_METHOD_CASH,
+                    2, 1, ""));
+
+            reservationService.createReservation(new CreateReservationRequest(
+                    6, 1, EPaymentMethod.PAYMENT_METHOD_CARD,
+                    3, 1, "Хочу у окна"));
+
+            reservationService.createReservation(new CreateReservationRequest(
+                    7, 1, EPaymentMethod.PAYMENT_METHOD_CASH,
+                    4, 1, ""));
+
+            reservationService.createReservation(new CreateReservationRequest(
+                    8, 4, EPaymentMethod.PAYMENT_METHOD_CARD,
+                    10, 1, "Буду с собакой"));
+
+            reservationService.createReservation(new CreateReservationRequest(
+                    9, 4, EPaymentMethod.PAYMENT_METHOD_CASH,
+                    10, 1, ""));
+
+            reservationService.createReservation(new CreateReservationRequest(
+                    10, 4, EPaymentMethod.PAYMENT_METHOD_CARD,
+                    11, 1, "Мне нужно одиночное место у выхода"));
         };
     }
 }

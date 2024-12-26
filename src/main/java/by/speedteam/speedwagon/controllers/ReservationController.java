@@ -1,6 +1,7 @@
 package by.speedteam.speedwagon.controllers;
 
 import by.speedteam.speedwagon.models.Reservation;
+import by.speedteam.speedwagon.payload.requests.reservations.CreateReservationRequest;
 import by.speedteam.speedwagon.payload.responses.ErrorResponse;
 import by.speedteam.speedwagon.payload.responses.SuccessResponse;
 import by.speedteam.speedwagon.services.ReservationService;
@@ -65,9 +66,9 @@ public class ReservationController {
     }
 
     @PostMapping("/api/v1/reservations")
-    public ResponseEntity<?> createReservation(@RequestBody Reservation reservation) {
+    public ResponseEntity<?> createReservation(@RequestBody CreateReservationRequest createReservationRequest) {
         try {
-            Reservation newReservation = reservationService.createReservation(reservation);
+            Reservation newReservation = reservationService.createReservation(createReservationRequest);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(new SuccessResponse<>("Reservation created successfully", newReservation));
         } catch (Exception e) {
