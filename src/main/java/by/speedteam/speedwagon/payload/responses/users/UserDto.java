@@ -1,33 +1,35 @@
-package by.speedteam.speedwagon.payload.requests;
+package by.speedteam.speedwagon.payload.responses.users;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import by.speedteam.speedwagon.models.ERole;
 
-public class RegisterRequest {
-    @NotBlank
-    @Email
+public class UserDto {
+    private long id;
     private String email;
-
-    @NotBlank
-    private String password;
-
     private String phone;
-
-    @NotBlank
     private String firstname;
-
-    @NotBlank
     private String lastname;
-
     private String surname;
+    private ERole role;
 
-    public RegisterRequest(String email, String password, String phone, String firstname, String lastname, String surname) {
+    public UserDto() {
+    }
+
+    public UserDto(long id, String email, String phone, String firstname, String lastname, String surname, ERole role) {
+        this.id = id;
         this.email = email;
-        this.password = password;
         this.phone = phone;
         this.firstname = firstname;
         this.lastname = lastname;
         this.surname = surname;
+        this.role = role;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -36,14 +38,6 @@ public class RegisterRequest {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getPhone() {
@@ -76,5 +70,13 @@ public class RegisterRequest {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public ERole getRole() {
+        return role;
+    }
+
+    public void setRole(ERole role) {
+        this.role = role;
     }
 }

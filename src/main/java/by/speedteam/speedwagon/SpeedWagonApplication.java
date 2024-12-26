@@ -1,6 +1,7 @@
 package by.speedteam.speedwagon;
 
 import by.speedteam.speedwagon.models.*;
+import by.speedteam.speedwagon.payload.requests.users.RegisterRequest;
 import by.speedteam.speedwagon.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -32,42 +33,47 @@ public class SpeedWagonApplication {
             roleService.createRole(new Role(ERole.ROLE_ADMIN));
 
             // 2. Создаем пользователей
-            userService.createUser(new User(
+            userService.registerUser(new RegisterRequest(
                     "admin1@gmail.com", "123456789", "+375296850298",
-                    "Костецкий", "Павел", "Сергеевич", roleService.getRoleById(1).get()));
-            userService.createUser(new User(
+                    "Костецкий", "Павел", "Сергеевич"));
+            userService.registerUser(new RegisterRequest(
                     "admin2@gmail.com", "123456790", "+375448658619",
-                    "Гулин", "Егор", "Николаевич", roleService.getRoleById(1).get()));
-            userService.createUser(new User(
+                    "Гулин", "Егор", "Николаевич"));
+            userService.registerUser(new RegisterRequest(
                     "admin3@gmail.com", "123456791", "+375295481650",
-                    "Дёмин", "Владимир", "Олегович", roleService.getRoleById(1).get()));
-            userService.createUser(new User(
+                    "Дёмин", "Владимир", "Олегович"));
+            userService.registerUser(new RegisterRequest(
                     "passenger1@gmail.com", "Jgdsyasp1", "+375442347019",
-                    "Петрачков", "Степан", "Леонидович", roleService.getRoleById(2).get()));
-            userService.createUser(new User(
+                    "Петрачков", "Степан", "Леонидович"));
+            userService.registerUser(new RegisterRequest(
                     "passenger2@gmail.com", "Ngfdsu21", "+375448260091",
-                    "Петрачков", "Василий", "Леонидович", roleService.getRoleById(2).get()));
-            userService.createUser(new User(
+                    "Петрачков", "Василий", "Леонидович"));
+            userService.registerUser(new RegisterRequest(
                     "passenger3@gmail.com", "55Kgfipa", "+375445551841",
-                    "Петрачков", "Андрей", "Павлович", roleService.getRoleById(2).get()));
-            userService.createUser(new User(
+                    "Петрачков", "Андрей", "Павлович"));
+            userService.registerUser(new RegisterRequest(
                     "passenger4@gmail.com", "JAJA228", "+375449090412",
-                    "Петрачков", "Арсений", "Михайлович", roleService.getRoleById(2).get()));
-            userService.createUser(new User(
+                    "Петрачков", "Арсений", "Михайлович"));
+            userService.registerUser(new RegisterRequest(
                     "passenger5@gmail.com", "1337MOSA", "+375298766592",
-                    "Петрачков", "Артем", "Сергеевич", roleService.getRoleById(2).get()));
-            userService.createUser(new User(
+                    "Петрачков", "Артем", "Сергеевич"));
+            userService.registerUser(new RegisterRequest(
                     "passenger6@gmail.com", "Mlautgausten", "+375290566911",
-                    "Петрачков", "Ярослав", "Евгеньевич", roleService.getRoleById(2).get()));
-            userService.createUser(new User(
+                    "Петрачков", "Ярослав", "Евгеньевич"));
+            userService.registerUser(new RegisterRequest(
                     "passenger7@gmail.com", "Mhusdfj0Log", "+375298512984",
-                    "Петрачков", "Илья", "Васильевич", roleService.getRoleById(2).get()));
+                    "Петрачков", "Илья", "Васильевич"));
 
-            // 3. Создаем способы оплаты
+            // 3. Назначаем роль админа пользователям
+            userService.assignAdminRole(1);
+            userService.assignAdminRole(2);
+            userService.assignAdminRole(3);
+
+            // 4. Создаем способы оплаты
             paymentMethodService.createPaymentMethod(new PaymentMethod(EPaymentMethod.PAYMENT_METHOD_CARD));
             paymentMethodService.createPaymentMethod(new PaymentMethod(EPaymentMethod.PAYMENT_METHOD_CASH));
 
-            // 4. Создаем остановки
+            // 5. Создаем остановки
             busStopService.createBusStop(new BusStop(
                     "Минск", "Улица Кирова, 8, парковка 2", false));
             busStopService.createBusStop(new BusStop(
@@ -101,7 +107,7 @@ public class SpeedWagonApplication {
             busStopService.createBusStop(new BusStop(
                     "Могилев", "Улица Кирова, 20", true));
 
-            // 5. Создаем маршруты
+            // 6. Создаем маршруты
             routeService.createRoute(new Route(
                     busStopService.getBusStopById(1).get(), busStopService.getBusStopById(5).get(), "[1, 2, 3, 4]"));
             routeService.createRoute(new Route(
@@ -119,7 +125,7 @@ public class SpeedWagonApplication {
             routeService.createRoute(new Route(
                     busStopService.getBusStopById(16).get(), busStopService.getBusStopById(1).get(), "[16, 15, 14, 13]"));
 
-            // 6. Создаем автобусы
+            // 7. Создаем автобусы
             busService.createBus(new Bus(
                     "АК 1234-6", "Сметанов Игнат Васильевич",
                     15, "Mercedes", "Белый"));
@@ -136,7 +142,7 @@ public class SpeedWagonApplication {
             busService.createBus(new Bus("АВ 7899-6", "Новиков Михаил Степанович",
                     15, "Volkswagen", "Синий"));
 
-            // 7. Создаем поездки
+            // 8. Создаем поездки
             tripService.createTrip(new Trip(
                     busService.getBusByNumber("АК 1234-6").get(),
                     routeService.getRouteById(1).get(),
@@ -198,7 +204,7 @@ public class SpeedWagonApplication {
                     LocalDate.of(2024, 12, 27),
                     LocalTime.of(20, 0), 19));
 
-            // 8. Создаем бронирования
+            // 9. Создаем бронирования
             reservationService.createReservation(new Reservation(
                     userService.getUserById(4).get(),
                     tripService.getTripById(1).get(),
