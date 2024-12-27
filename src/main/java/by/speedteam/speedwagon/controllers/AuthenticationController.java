@@ -10,6 +10,11 @@ import by.speedteam.speedwagon.payload.responses.jwt.JwtResponse;
 import by.speedteam.speedwagon.payload.responses.users.UserDto;
 import by.speedteam.speedwagon.security.JwtUtils;
 import by.speedteam.speedwagon.services.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +27,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -41,17 +45,19 @@ public class AuthenticationController {
         this.jwtUtils = jwtUtils;
     }
 
-//    @Operation(summary = "Register a new user",
-//            description = "Registers a new user and sends a confirmation email.",
-//            responses = {
-//                    @ApiResponse(responseCode = "201", description = "User registered successfully",
-//                            content = @Content(schema = @Schema(implementation = SuccessResponse.class))),
-//                    @ApiResponse(responseCode = "400", description = "Email already exists",
-//                            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
-//                    @ApiResponse(responseCode = "500", description = "Internal server error",
-//                            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
-//            })
     @PostMapping("/register")
+    @Operation(summary = "Register a new user", description = "Register a new user.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "User registered successfully", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = SuccessResponse.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Email already exists", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+            })
+    })
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
         if (userService.isEmailAlreadyExists(registerRequest.getEmail())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -69,18 +75,19 @@ public class AuthenticationController {
         }
     }
 
-
-//    @Operation(summary = "Login user",
-//            description = "Authenticates the user and returns a JWT token.",
-//            responses = {
-//                    @ApiResponse(responseCode = "200", description = "Login successful",
-//                            content = @Content(schema = @Schema(implementation = SuccessResponse.class))),
-//                    @ApiResponse(responseCode = "401", description = "Bad credentials",
-//                            content = @Content(schema = @Schema(implementation = ErrorResponse.class))),
-//                    @ApiResponse(responseCode = "500", description = "Internal server error",
-//                            content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
-//            })
     @PostMapping("/login")
+    @Operation(summary = "Login user", description = "Authenticates the user and returns a JWT token.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Login successful", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = SuccessResponse.class))
+            }),
+            @ApiResponse(responseCode = "401", description = "Bad credentials", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+            }),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class))
+            })
+    })
     public ResponseEntity<?> loginUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
