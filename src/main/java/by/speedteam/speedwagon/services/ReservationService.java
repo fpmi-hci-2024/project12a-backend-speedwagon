@@ -35,10 +35,7 @@ public class ReservationService {
     }
 
     public List<Reservation> getReservationsByUserId(long userId) {
-        List<Reservation> reservations = reservationRepository.findByUserId(userId);
-
-        //convertToDto
-        return reservations;
+        return reservationRepository.findByUserId(userId);
     }
 
     public Reservation createReservation(CreateReservationRequest createReservationRequest) {
