@@ -41,9 +41,6 @@ public class RouteService {
     }
 
     public void deleteRoute(long id) {
-        if (!routeRepository.existsById(id)) {
-            throw new RuntimeException("Route not found");
-        }
         routeRepository.deleteById(id);
     }
 }
